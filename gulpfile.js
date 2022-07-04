@@ -17,13 +17,14 @@ const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 const browserSync = require("browser-sync").create();
 
-var gulp = require('gulp');
-var ghPages = require('master');
+const ghPages = require('gh-pages');
+const path = require('path')
 
-gulp.task('deploy', function() {
-    return gulp.src('./build/**/*')
-        .pipe(ghPages());
-});
+function deploy(cb) {
+    ghPages.publish(path.join(process.cwd(), './build'), cb);
+}
+exports.deploy = deploy;
+
 
 /* Paths */
 const srcPath = 'src/';
